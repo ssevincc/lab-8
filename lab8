@@ -1,0 +1,27 @@
+17)x**2+ln(x)−4=0 in the interval [1.0,2.0]
+
+import math
+def f(x):
+    return x**2 + math.log(x) - 4
+def bisection(a, b, tol=1e-6, max_iter=100):
+    if f(a) * f(b) >= 0:
+        print("No guaranteed root in this interval.")
+        return None
+
+    iter_count = 0
+    while (b - a) / 2 > tol and iter_count < max_iter:
+        c = (a + b) / 2
+        if f(c) == 0:
+            return c
+        elif f(a) * f(c) < 0:
+            b = c
+        else:
+            a = c
+        iter_count += 1
+
+    return (a + b) / 2
+a = 1.0
+b = 2.0
+
+root = bisection(a, b)
+print(f"Approximate root: {root}")
